@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saffron Table | Restaurant Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+:root{
+  --ink:#1d2428;
+  --muted:#647076;
+  --line:#e7e1d8;
+  --paper:#fffaf2;
+  --surface:#ffffff;
+  --accent:#b83b2f;
+  --accent-2:#1f7a6d;
+  --gold:#d89a2b;
+  --charcoal:#263238;
+  --shadow:0 18px 50px rgba(38,50,56,.14);
+  --radius:8px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button,input,textarea{font:inherit}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(255,250,242,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.navbar{max-width:1240px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 22px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem}.brand-mark{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;background:var(--accent);color:#fff}.nav-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap}.nav-links a{padding:9px 11px;border-radius:7px;font-weight:700;font-size:.9rem;color:#364146}.nav-links a:hover,.nav-links a.active{background:#f1dfcf;color:var(--accent)}.nav-toggle{display:none;border:0;background:var(--charcoal);color:#fff;width:40px;height:40px;border-radius:8px}
+.page{display:none}.page.active{display:block;animation:fadeIn .35s ease}.hero{min-height:660px;background:linear-gradient(90deg,rgba(16,24,28,.78),rgba(16,24,28,.28)),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85') center/cover;display:flex;align-items:center}.hero-content{max-width:720px;color:#fff;padding:110px 7vw}.hero h1,.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);line-height:.95;margin:0 0 18px}.hero p{font-size:1.18rem;max-width:650px}.eyebrow{letter-spacing:.12em;text-transform:uppercase;font-size:.76rem;font-weight:800;color:var(--gold);margin:0 0 10px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:0;border-radius:8px;padding:12px 17px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;cursor:pointer;transition:.2s ease}.btn.primary{background:var(--accent);color:#fff}.btn.primary:hover{background:#942c24;transform:translateY(-1px)}.btn.ghost{background:#fff;color:var(--charcoal);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}.btn.small{padding:8px 10px;font-size:.85rem}.btn.full{width:100%}
+.section-wrap{max-width:1240px;margin:auto;padding:74px 22px}.section-title{text-align:center;max-width:760px;margin:0 auto 34px}.section-title h2,.story h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.1rem);line-height:1.05;margin:0}.muted-band{max-width:none;background:#f3ecdf}.muted-band>*{max-width:1240px;margin-left:auto;margin-right:auto}.page-hero{min-height:330px;color:#fff;display:grid;place-items:center;text-align:center;padding:80px 20px;background:linear-gradient(90deg,rgba(18,28,31,.78),rgba(18,28,31,.35)),var(--bg) center/cover}.page-hero p{font-size:1.12rem;margin:0}.about-hero{--bg:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80')}.menu-hero{--bg:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80')}.reservation-hero{--bg:url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1600&q=80')}.order-hero{--bg:url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80')}.login-hero{--bg:url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=1600&q=80')}.admin-hero{--bg:url('https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&fit=crop&w=1600&q=80')}.staff-hero{--bg:url('https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1600&q=80')}.contact-hero{--bg:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80')}.reports-hero{--bg:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80')}
+.dish-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}.dish-card,.team-card,.testimonial,.panel,.dash-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(38,50,56,.08)}.dish-card{overflow:hidden;transition:.2s}.dish-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.dish-card img{height:180px;width:100%;object-fit:cover}.dish-body{padding:17px}.dish-meta{display:flex;justify-content:space-between;gap:12px;align-items:start}.dish-card h3{margin:0;font-size:1.05rem}.price{font-weight:900;color:var(--accent)}.tag{display:inline-flex;margin-top:12px;background:#e8f4f1;color:var(--accent-2);padding:4px 9px;border-radius:999px;font-size:.78rem;font-weight:800}.testimonial{padding:24px}.testimonial i{color:var(--gold);font-size:1.4rem}.testimonial-grid,.team-grid,.dashboard-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}.team-card{overflow:hidden;text-align:center}.team-card img{height:245px;width:100%;object-fit:cover}.team-card h3{margin:16px 0 0}.team-card p{margin:4px 0 18px;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}.mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}.mission-grid article{background:#fff;border:1px solid var(--line);padding:18px;border-radius:8px}.mission-grid i{color:var(--accent);font-size:1.4rem}.image-stack{display:grid;grid-template-columns:1fr 1fr;gap:14px}.image-stack img{height:390px;object-fit:cover;border-radius:8px}.image-stack img:nth-child(2){margin-top:54px}
+.toolbar{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:28px}.search-box{display:flex;align-items:center;gap:10px;min-width:min(100%,390px);background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 14px}.search-box input{border:0;outline:0;width:100%;padding:13px 0;background:transparent}.filter-tabs{display:flex;gap:8px;flex-wrap:wrap}.filter-tabs button{border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:8px;font-weight:800;cursor:pointer}.filter-tabs button.active{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.form-layout,.order-layout,.auth-grid,.contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}.order-layout{grid-template-columns:1fr 360px}.panel{padding:24px}.panel h2{margin:0 0 18px;font-size:1.25rem}.form-panel label{display:grid;gap:7px;font-weight:800;color:#384349;margin-bottom:14px}.form-panel input,.form-panel textarea,select{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px;background:#fff}.form-panel textarea{min-height:130px;resize:vertical}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.message{min-height:26px;font-weight:800;color:var(--accent-2)}.message.error{color:var(--accent)}.info-panel i{font-size:2rem;color:var(--accent)}.mini-stat,.cart-total,.attendance{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0}.cart-panel{position:sticky;top:88px}.cart-items{display:grid;gap:12px;min-height:80px}.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px}.qty-controls{display:flex;align-items:center;gap:8px}.qty-controls button{width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.dashboard-page .section-wrap{padding-top:42px}.dash-card{padding:20px;display:flex;align-items:center;gap:14px}.dash-card i{width:46px;height:46px;border-radius:8px;display:grid;place-items:center;background:#edf7f5;color:var(--accent-2);font-size:1.2rem}.dash-card strong{display:block;font-size:1.55rem}.dash-card span{color:var(--muted);font-weight:800}.dashboard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}table{width:100%;border-collapse:collapse;font-size:.93rem}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:.78rem;text-transform:uppercase}.status{padding:4px 8px;border-radius:999px;font-size:.78rem;font-weight:800;background:#f6eadb;color:#98601d}.status.good{background:#e8f4f1;color:var(--accent-2)}.task-list{list-style:none;padding:0;margin:0;display:grid;gap:11px}.task-list li{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:8px}.table-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.table-seat{border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center;font-weight:900;background:#f8f1e7}.table-seat.free{background:#e8f4f1;color:var(--accent-2)}.contact-card p{display:flex;gap:10px;align-items:center}.contact-card i{color:var(--accent)}iframe{width:100%;height:260px;border:0;border-radius:8px;margin-top:12px}.footer{background:#182125;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 7vw}.footer p{margin:4px 0 0;color:#b7c1c6}.socials{display:flex;gap:10px}.socials a{width:38px;height:38px;border:1px solid rgba(255,255,255,.22);border-radius:8px;display:grid;place-items:center}.socials a:hover{background:var(--accent)}
+.reveal{opacity:0;transform:translateY(18px);transition:.5s ease}.reveal.visible{opacity:1;transform:none}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media (max-width:920px){.nav-toggle{display:grid;place-items:center}.nav-links{display:none;position:absolute;left:16px;right:16px;top:70px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:10px}.nav-links.open{display:grid;grid-template-columns:repeat(2,1fr)}.hero{min-height:590px}.about-grid,.form-layout,.order-layout,.auth-grid,.contact-grid,.dashboard-grid{grid-template-columns:1fr}.cart-panel{position:static}.form-grid{grid-template-columns:1fr}.image-stack img{height:280px}.footer{display:block}.socials{margin-top:18px}}
+@media (max-width:560px){.navbar{padding:12px 14px}.brand span:last-child{font-size:.95rem}.nav-links.open{grid-template-columns:1fr}.hero-content{padding:82px 22px}.hero h1,.page-hero h1{font-size:3rem}.section-wrap{padding:50px 16px}.mission-grid,.image-stack{grid-template-columns:1fr}.image-stack img:nth-child(2){margin-top:0}.toolbar{align-items:stretch}.filter-tabs button{flex:1}.dashboard-cards{grid-template-columns:1fr}.table-map{grid-template-columns:repeat(2,1fr)}th,td{padding:10px 7px;font-size:.82rem}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#home" data-page="home">
+        <span class="brand-mark"><i class="fa-solid fa-utensils"></i></span>
+        <span>Saffron Table</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="nav-links">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#about" data-page="about">About</a>
+        <a href="#menu" data-page="menu">Menu</a>
+        <a href="#reservation" data-page="reservation">Reservation</a>
+        <a href="#order" data-page="order">Order</a>
+        <a href="#login" data-page="login">Login</a>
+        <a href="#admin" data-page="admin">Admin</a>
+        <a href="#staff" data-page="staff">Staff</a>
+        <a href="#contact" data-page="contact">Contact</a>
+        <a href="#reports" data-page="reports">Reports</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="hero-content reveal">
+          <p class="eyebrow">Restaurant Management System</p>
+          <h1>Saffron Table</h1>
+          <p>Serve guests, manage orders, track reservations, and understand daily performance from one elegant restaurant dashboard.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#reservation" data-page="reservation"><i class="fa-solid fa-calendar-check"></i> Book a Table</a>
+            <a class="btn ghost" href="#order" data-page="order"><i class="fa-solid fa-bag-shopping"></i> Order Online</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-wrap">
+        <div class="section-title reveal">
+          <p class="eyebrow">Chef's Picks</p>
+          <h2>Featured Dishes</h2>
+        </div>
+        <div class="dish-grid featured-dishes"></div>
+      </div>
+
+      <div class="section-wrap muted-band">
+        <div class="section-title reveal">
+          <p class="eyebrow">Guest Stories</p>
+          <h2>Customer Testimonials</h2>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial reveal"><i class="fa-solid fa-quote-left"></i><p>The reservation flow was smooth and the service team had our table ready before we arrived.</p><strong>Priya Menon</strong></article>
+          <article class="testimonial reveal"><i class="fa-solid fa-quote-left"></i><p>Fresh food, fast billing, and a clean order status screen. This feels built for a busy restaurant.</p><strong>Arjun Patel</strong></article>
+          <article class="testimonial reveal"><i class="fa-solid fa-quote-left"></i><p>The menu filters made it easy to find vegetarian dishes and place a quick office lunch order.</p><strong>Nisha Rao</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="page">
+      <div class="page-hero compact about-hero"><h1>About Us</h1><p>Hospitality, craft, and calm operations under one roof.</p></div>
+      <div class="section-wrap about-grid">
+        <div class="story reveal">
+          <p class="eyebrow">Our Story</p>
+          <h2>Serving memorable meals since 2012</h2>
+          <p>Saffron Table began as a small family dining room and grew into a modern restaurant known for seasonal produce, careful service, and reliable kitchen operations.</p>
+          <p>Our management system reflects that same culture: every order, table, customer, and inventory movement should be simple to track.</p>
+          <div class="mission-grid">
+            <article><i class="fa-solid fa-bullseye"></i><h3>Mission</h3><p>Deliver flavorful meals with warm, organized, and consistent service.</p></article>
+            <article><i class="fa-solid fa-eye"></i><h3>Vision</h3><p>Become the most trusted neighborhood restaurant experience for families and teams.</p></article>
+          </div>
+        </div>
+        <div class="image-stack reveal">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80" alt="Restaurant dining area">
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=700&q=80" alt="Chef plating food">
+        </div>
+      </div>
+      <div class="section-wrap">
+        <div class="section-title reveal"><p class="eyebrow">People</p><h2>Meet the Team</h2></div>
+        <div class="team-grid">
+          <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=500&q=80" alt="Head chef"><h3>Ravi Kumar</h3><p>Executive Chef</p></article>
+          <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt="Restaurant manager"><h3>Ananya Shah</h3><p>Restaurant Manager</p></article>
+          <article class="team-card reveal"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Service captain"><h3>Karan Mehta</h3><p>Service Captain</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="page">
+      <div class="page-hero compact menu-hero"><h1>Menu</h1><p>Search dishes, filter categories, and compare prices instantly.</p></div>
+      <div class="section-wrap">
+        <div class="toolbar reveal">
+          <label class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="menuSearch" type="search" placeholder="Search food, description, or category"></label>
+          <div class="filter-tabs" id="menuFilters"></div>
+        </div>
+        <div class="dish-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section id="reservation" class="page">
+      <div class="page-hero compact reservation-hero"><h1>Reservation</h1><p>Book a table and receive instant confirmation.</p></div>
+      <div class="section-wrap form-layout">
+        <form id="reservationForm" class="panel form-panel" novalidate>
+          <h2>Table Booking</h2>
+          <div class="form-grid">
+            <label>Customer Name<input type="text" name="name" required minlength="3"></label>
+            <label>Phone Number<input type="tel" name="phone" required pattern="[0-9]{10}"></label>
+            <label>Date<input type="date" name="date" required></label>
+            <label>Time<input type="time" name="time" required></label>
+            <label>Number of Guests<input type="number" name="guests" min="1" max="20" required></label>
+          </div>
+          <button class="btn primary" type="submit"><i class="fa-solid fa-check"></i> Confirm Reservation</button>
+          <p class="message" id="reservationMessage"></p>
+        </form>
+        <aside class="panel info-panel"><i class="fa-solid fa-chair"></i><h3>Live Table Snapshot</h3><p>12 tables available today. Peak hours usually start after 7:30 PM.</p><div class="mini-stat"><span>Booked</span><strong>18</strong></div><div class="mini-stat"><span>Available</span><strong>12</strong></div></aside>
+      </div>
+    </section>
+
+    <section id="order" class="page">
+      <div class="page-hero compact order-hero"><h1>Order Online</h1><p>Add dishes, adjust quantities, and review checkout totals.</p></div>
+      <div class="section-wrap order-layout">
+        <div class="dish-grid order-menu" id="orderGrid"></div>
+        <aside class="panel cart-panel">
+          <h2><i class="fa-solid fa-cart-shopping"></i> Order Summary</h2>
+          <div id="cartItems" class="cart-items"></div>
+          <div class="cart-total"><span>Total</span><strong id="cartTotal">Rs.0</strong></div>
+          <button class="btn primary full" id="checkoutBtn"><i class="fa-solid fa-credit-card"></i> Checkout</button>
+          <p class="message" id="checkoutMessage"></p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="login" class="page">
+      <div class="page-hero compact login-hero"><h1>Customer Login</h1><p>Register, sign in, or recover access.</p></div>
+      <div class="section-wrap auth-grid">
+        <form id="registerForm" class="panel form-panel" novalidate><h2>Register</h2><label>Full Name<input type="text" required minlength="3"></label><label>Email<input type="email" required></label><label>Password<input type="password" required minlength="6"></label><button class="btn primary" type="submit">Create Account</button><p class="message"></p></form>
+        <form id="loginForm" class="panel form-panel" novalidate><h2>Login</h2><label>Email<input type="email" required></label><label>Password<input type="password" required minlength="6"></label><button class="btn primary" type="submit">Login</button><a href="#" id="forgotLink">Forgot password?</a><p class="message"></p></form>
+      </div>
+    </section>
+
+    <section id="admin" class="page dashboard-page">
+      <div class="page-hero compact admin-hero"><h1>Admin Dashboard</h1><p>Manage menu, orders, reservations, customers, reports, and inventory.</p></div>
+      <div class="section-wrap">
+        <div class="dashboard-cards" id="adminCards"></div>
+        <div class="dashboard-grid">
+          <div class="panel"><h2>Manage Menu Items</h2><table><thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Status</th></tr></thead><tbody id="menuTable"></tbody></table></div>
+          <div class="panel"><h2>Manage Orders</h2><table><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
+          <div class="panel"><h2>Inventory Management</h2><table><thead><tr><th>Ingredient</th><th>Stock</th><th>Level</th></tr></thead><tbody id="inventoryTable"></tbody></table></div>
+          <div class="panel"><h2>Sales Reports</h2><canvas id="adminChart" height="180"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="staff" class="page dashboard-page">
+      <div class="page-hero compact staff-hero"><h1>Staff Dashboard</h1><p>Track assigned tasks, order status, table service, and attendance.</p></div>
+      <div class="section-wrap">
+        <div class="dashboard-cards" id="staffCards"></div>
+        <div class="dashboard-grid">
+          <div class="panel"><h2>Assigned Tasks</h2><ul class="task-list" id="taskList"></ul></div>
+          <div class="panel"><h2>Update Order Status</h2><table><thead><tr><th>Order</th><th>Table</th><th>Status</th></tr></thead><tbody id="staffOrders"></tbody></table></div>
+          <div class="panel"><h2>Table Service</h2><div class="table-map" id="tableMap"></div></div>
+          <div class="panel"><h2>Attendance Tracking</h2><div class="attendance"><strong>Clocked In</strong><span>09:58 AM</span><button class="btn ghost small" id="attendanceBtn">Mark Break</button></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="page">
+      <div class="page-hero compact contact-hero"><h1>Contact Us</h1><p>Questions, catering requests, and feedback are always welcome.</p></div>
+      <div class="section-wrap contact-grid">
+        <form id="contactForm" class="panel form-panel" novalidate><h2>Send a Message</h2><label>Name<input type="text" required minlength="3"></label><label>Email<input type="email" required></label><label>Message<textarea required minlength="10"></textarea></label><button class="btn primary" type="submit">Send Message</button><p class="message"></p></form>
+        <div class="panel contact-card"><h2>Restaurant Details</h2><p><i class="fa-solid fa-location-dot"></i> 24 Market Road, Chennai, Tamil Nadu</p><p><i class="fa-solid fa-phone"></i> +91 98765 43210</p><p><i class="fa-solid fa-envelope"></i> hello@saffrontable.in</p><iframe title="Google map showing Chennai" src="https://www.google.com/maps?q=Chennai%20Tamil%20Nadu&output=embed" loading="lazy"></iframe></div>
+      </div>
+    </section>
+
+    <section id="reports" class="page dashboard-page">
+      <div class="page-hero compact reports-hero"><h1>Reports</h1><p>Daily sales, monthly revenue, customer insights, and inventory health.</p></div>
+      <div class="section-wrap">
+        <div class="dashboard-cards" id="reportCards"></div>
+        <div class="dashboard-grid reports-grid">
+          <div class="panel"><h2>Daily Sales</h2><canvas id="dailyChart" height="190"></canvas></div>
+          <div class="panel"><h2>Monthly Revenue</h2><canvas id="revenueChart" height="190"></canvas></div>
+          <div class="panel"><h2>Customer Statistics</h2><canvas id="customerChart" height="190"></canvas></div>
+          <div class="panel"><h2>Inventory Reports</h2><table><thead><tr><th>Item</th><th>Used</th><th>Remaining</th></tr></thead><tbody id="reportInventory"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div><strong>Saffron Table</strong><p>Professional Restaurant Management System</p></div>
+    <div class="socials"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div>
+  </footer>
+
+  <script>
+const dishes = [
+  { id: 1, name: 'Crispy Paneer Bites', category: 'Starters', price: 180, desc: 'Golden paneer cubes with mint chutney and pickled onions.', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=80' },
+  { id: 2, name: 'Tandoori Prawns', category: 'Starters', price: 340, desc: 'Smoky prawns marinated with saffron yogurt and spices.', img: 'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=700&q=80' },
+  { id: 3, name: 'Butter Chicken', category: 'Main Course', price: 320, desc: 'Slow cooked chicken in a velvety tomato cashew gravy.', img: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=80' },
+  { id: 4, name: 'Paneer Lababdar', category: 'Main Course', price: 280, desc: 'Cottage cheese, rich onion masala, cream, and fenugreek.', img: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=700&q=80' },
+  { id: 5, name: 'Hyderabadi Biryani', category: 'Main Course', price: 360, desc: 'Aromatic basmati rice layered with herbs and tender meat.', img: 'https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=700&q=80' },
+  { id: 6, name: 'Chocolate Lava Cake', category: 'Desserts', price: 170, desc: 'Warm chocolate cake with a molten center and vanilla cream.', img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80' },
+  { id: 7, name: 'Gulab Jamun Cheesecake', category: 'Desserts', price: 190, desc: 'Classic Indian sweetness folded into a creamy cheesecake.', img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80' },
+  { id: 8, name: 'Mango Lassi', category: 'Beverages', price: 110, desc: 'Fresh mango, yogurt, cardamom, and a cool finish.', img: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=700&q=80' },
+  { id: 9, name: 'Masala Chai', category: 'Beverages', price: 70, desc: 'House tea brewed with ginger, cardamom, and milk.', img: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=700&q=80' }
+];
+
+const orders = [
+  ['#1042', 'Meera', 'Rs.840', 'Preparing'],
+  ['#1043', 'Vikram', 'Rs.520', 'Served'],
+  ['#1044', 'Niyona', 'Rs.1,120', 'Ready'],
+  ['#1045', 'Rahul', 'Rs.430', 'New']
+];
+const inventory = [['Basmati Rice','76 kg','Good'],['Paneer','18 kg','Low'],['Tomato','44 kg','Good'],['Cream','12 L','Low']];
+const cart = new Map();
+let activeCategory = 'All';
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => [...document.querySelectorAll(selector)];
+const formatPrice = value => `Rs.${value}`;
+
+function initNavigation(){
+  const nav = $('.nav-links');
+  $('.nav-toggle').addEventListener('click', () => nav.classList.toggle('open'));
+  $$('[data-page]').forEach(link => link.addEventListener('click', event => {
+    const page = link.dataset.page;
+    if(!page) return;
+    event.preventDefault();
+    showPage(page);
+    history.replaceState(null, '', `#${page}`);
+    nav.classList.remove('open');
+  }));
+  showPage(location.hash.replace('#','') || 'home');
+}
+
+function showPage(pageId){
+  $$('.page').forEach(page => page.classList.toggle('active', page.id === pageId));
+  $$('.nav-links a').forEach(link => link.classList.toggle('active', link.dataset.page === pageId));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  requestAnimationFrame(drawCharts);
+}
+
+function dishCard(dish, withButton = false){
+  return `<article class="dish-card reveal visible">
+    <img src="${dish.img}" alt="${dish.name}">
+    <div class="dish-body">
+      <div class="dish-meta"><h3>${dish.name}</h3><span class="price">${formatPrice(dish.price)}</span></div>
+      <p>${dish.desc}</p><span class="tag">${dish.category}</span>
+      ${withButton ? `<button class="btn primary full add-cart" data-id="${dish.id}"><i class="fa-solid fa-plus"></i> Add to Cart</button>` : ''}
+    </div>
+  </article>`;
+}
+
+function renderFeatured(){
+  $('.featured-dishes').innerHTML = dishes.slice(0,4).map(dish => dishCard(dish)).join('');
+}
+
+function renderMenu(){
+  const categories = ['All', ...new Set(dishes.map(dish => dish.category))];
+  $('#menuFilters').innerHTML = categories.map(category => `<button class="${category === activeCategory ? 'active' : ''}" data-category="${category}">${category}</button>`).join('');
+  renderMenuGrid();
+}
+
+function initMenuControls(){
+  $('#menuFilters').addEventListener('click', event => {
+    if(!event.target.matches('button')) return;
+    activeCategory = event.target.dataset.category;
+    renderMenu();
+  });
+  $('#menuSearch').addEventListener('input', renderMenuGrid);
+}
+
+function renderMenuGrid(){
+  const query = ($('#menuSearch')?.value || '').toLowerCase();
+  const filtered = dishes.filter(dish => (activeCategory === 'All' || dish.category === activeCategory) && `${dish.name} ${dish.desc} ${dish.category}`.toLowerCase().includes(query));
+  $('#menuGrid').innerHTML = filtered.length ? filtered.map(dish => dishCard(dish)).join('') : '<p>No dishes match your search.</p>';
+}
+
+function renderOrder(){
+  $('#orderGrid').innerHTML = dishes.map(dish => dishCard(dish, true)).join('');
+  $('#orderGrid').addEventListener('click', event => {
+    const button = event.target.closest('.add-cart');
+    if(!button) return;
+    const dish = dishes.find(item => item.id === Number(button.dataset.id));
+    cart.set(dish.id, { dish, qty: (cart.get(dish.id)?.qty || 0) + 1 });
+    renderCart();
+  });
+}
+
+function renderCart(){
+  const rows = [...cart.values()];
+  $('#cartItems').innerHTML = rows.length ? rows.map(({dish, qty}) => `<div class="cart-row"><div><strong>${dish.name}</strong><br><span>${formatPrice(dish.price)} each</span></div><div class="qty-controls"><button data-cart="minus" data-id="${dish.id}">-</button><strong>${qty}</strong><button data-cart="plus" data-id="${dish.id}">+</button></div></div>`).join('') : '<p>Your cart is empty.</p>';
+  const total = rows.reduce((sum, item) => sum + item.dish.price * item.qty, 0);
+  $('#cartTotal').textContent = formatPrice(total);
+}
+
+function initCartActions(){
+  $('#cartItems').addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if(!button) return;
+    const item = cart.get(Number(button.dataset.id));
+    if(!item) return;
+    item.qty += button.dataset.cart === 'plus' ? 1 : -1;
+    item.qty <= 0 ? cart.delete(item.dish.id) : cart.set(item.dish.id, item);
+    renderCart();
+  });
+  $('#checkoutBtn').addEventListener('click', () => {
+    const message = $('#checkoutMessage');
+    if(!cart.size){ message.textContent = 'Add at least one item before checkout.'; message.classList.add('error'); return; }
+    cart.clear();
+    renderCart();
+    message.classList.remove('error');
+    message.textContent = 'Checkout complete. Your order has been sent to the kitchen.';
+  });
+}
+
+function validateForm(form, successText){
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const message = form.querySelector('.message') || form.nextElementSibling;
+    if(!form.checkValidity()){
+      message.textContent = 'Please complete all fields with valid information.';
+      message.classList.add('error');
+      form.reportValidity();
+      return;
+    }
+    message.classList.remove('error');
+    message.textContent = successText;
+    form.reset();
+  });
+}
+
+function renderDashboard(){
+  $('#adminCards').innerHTML = card('fa-bag-shopping','Today Orders','124') + card('fa-calendar-check','Reservations','38') + card('fa-users','Customers','2,486') + card('fa-boxes-stacked','Inventory Alerts','6');
+  $('#staffCards').innerHTML = card('fa-list-check','Assigned Tasks','9') + card('fa-bell-concierge','Active Tables','14') + card('fa-clock','Shift Hours','7.5') + card('fa-mug-hot','Breaks Logged','1');
+  $('#reportCards').innerHTML = card('fa-indian-rupee-sign','Daily Sales','Rs.48K') + card('fa-chart-line','Monthly Revenue','Rs.9.8L') + card('fa-user-plus','New Customers','146') + card('fa-triangle-exclamation','Low Stock','4');
+  $('#menuTable').innerHTML = dishes.slice(0,6).map(d => `<tr><td>${d.name}</td><td>${d.category}</td><td>${formatPrice(d.price)}</td><td><span class="status good">Active</span></td></tr>`).join('');
+  $('#ordersTable').innerHTML = orders.map(o => `<tr><td>${o[0]}</td><td>${o[1]}</td><td>${o[2]}</td><td><span class="status">${o[3]}</span></td></tr>`).join('');
+  $('#inventoryTable').innerHTML = inventory.map(i => `<tr><td>${i[0]}</td><td>${i[1]}</td><td><span class="status ${i[2] === 'Good' ? 'good' : ''}">${i[2]}</span></td></tr>`).join('');
+  $('#staffOrders').innerHTML = orders.map((o, index) => `<tr><td>${o[0]}</td><td>T${index + 3}</td><td><select><option>${o[3]}</option><option>Preparing</option><option>Ready</option><option>Served</option></select></td></tr>`).join('');
+  $('#taskList').innerHTML = ['Prepare table 7 for birthday booking','Confirm online order #1044','Restock dessert counter','Update table service for section B'].map(task => `<li><i class="fa-solid fa-circle-check"></i>${task}</li>`).join('');
+  $('#tableMap').innerHTML = Array.from({length:12},(_,i) => `<div class="table-seat ${i % 3 === 0 ? 'free' : ''}">T${i + 1}<br><small>${i % 3 === 0 ? 'Free' : 'Busy'}</small></div>`).join('');
+  $('#reportInventory').innerHTML = inventory.map(i => `<tr><td>${i[0]}</td><td>${Math.floor(Math.random()*40)+12}%</td><td>${i[1]}</td></tr>`).join('');
+}
+
+function card(icon, label, value){
+  return `<article class="dash-card"><i class="fa-solid ${icon}"></i><div><strong>${value}</strong><span>${label}</span></div></article>`;
+}
+
+function drawBarChart(id, labels, values, color){
+  const canvas = document.getElementById(id);
+  if(!canvas || !canvas.offsetParent) return;
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.clientWidth * devicePixelRatio;
+  const height = canvas.height = canvas.clientHeight * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  ctx.clearRect(0,0,width,height);
+  const w = canvas.clientWidth, h = canvas.clientHeight, pad = 34;
+  const max = Math.max(...values) * 1.18;
+  ctx.strokeStyle = '#e7e1d8'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad, 10); ctx.lineTo(pad, h - pad); ctx.lineTo(w - 8, h - pad); ctx.stroke();
+  const gap = (w - pad - 20) / values.length;
+  values.forEach((value, i) => {
+    const barH = (h - pad - 24) * value / max;
+    const x = pad + i * gap + 10;
+    const y = h - pad - barH;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, Math.max(18, gap - 18), barH);
+    ctx.fillStyle = '#647076'; ctx.font = '12px Inter'; ctx.fillText(labels[i], x, h - 10);
+  });
+}
+
+function drawCharts(){
+  drawBarChart('adminChart', ['Mon','Tue','Wed','Thu','Fri','Sat'], [28,35,31,46,52,61], '#1f7a6d');
+  drawBarChart('dailyChart', ['9a','12p','3p','6p','9p'], [12,28,22,48,38], '#b83b2f');
+  drawBarChart('revenueChart', ['Jan','Feb','Mar','Apr','May','Jun'], [4.2,5.1,6.8,7.4,8.6,9.8], '#d89a2b');
+  drawBarChart('customerChart', ['New','Repeat','VIP','Online'], [146,320,58,240], '#1f7a6d');
+}
+
+function initReveal(){
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.target.classList.toggle('visible', entry.isIntersecting)), { threshold: .12 });
+  $$('.reveal').forEach(item => observer.observe(item));
+}
+
+function initForms(){
+  validateForm($('#reservationForm'), 'Reservation confirmed. We look forward to serving you.');
+  validateForm($('#registerForm'), 'Account created successfully.');
+  validateForm($('#loginForm'), 'Login successful. Welcome back.');
+  validateForm($('#contactForm'), 'Message sent. Our team will contact you soon.');
+  $('#forgotLink').addEventListener('click', event => { event.preventDefault(); alert('Password reset link sent to your registered email.'); });
+  $('#attendanceBtn').addEventListener('click', event => { event.currentTarget.textContent = event.currentTarget.textContent === 'Mark Break' ? 'Resume Shift' : 'Mark Break'; });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderFeatured();
+  renderMenu();
+  initMenuControls();
+  renderOrder();
+  renderCart();
+  renderDashboard();
+  initNavigation();
+  initCartActions();
+  initForms();
+  initReveal();
+  drawCharts();
+  window.addEventListener('resize', drawCharts);
+});
+  </script>
+</body>
+</html>
